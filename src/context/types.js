@@ -1,0 +1,8 @@
+export const LOGIN = 'LOGIN'
+export const REGISTER = 'REGISTER'
+export const AUTH_ERROR = 'AUTH_ERROR'
+export const AUTH_LOADING = 'AUTH_LOADING'
+export const USER_LOADING = 'USER_LOADING'
+export const SET_USER = 'SET_USER'
+export const LOGOUT = 'LOGOUT'
+export const RESET_PASSWORD = 'RESET_PASSWORD'
