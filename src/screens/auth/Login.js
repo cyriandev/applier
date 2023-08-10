@@ -14,7 +14,7 @@ const Login = ({ navigation }) => {
       email,
       password,
     }
-    if (email == '' || password == '') console.log('fill everything')
+    if (email == '' || password == '') console.log('hello')
     else login(user)
   }
   return (

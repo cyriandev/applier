@@ -20,7 +20,14 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth'
 import { auth, db } from '../../firebase/config'
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from 'firebase/firestore'
 
 const AuthState = ({ children }) => {
   const initialState = {
@@ -34,13 +41,18 @@ const AuthState = ({ children }) => {
   const adminsCollection = collection(db, 'admins')
 
   // Register
-  const register = (user) => {
+  const register = async (user) => {
     setAuthLoading()
     createUserWithEmailAndPassword(auth, user.email, user.password)
       .then((credentials) => {
         updateProfile(credentials.user, { displayName: user.name })
           .then(() => console.log('name saved'))
           .catch((error) => console.log(error))
+
+        setDoc(doc(db, 'chats', credentials.user.uid), { username: user.name })
+          .then(() => console.log('chat saved'))
+          .catch((error) => console.log(error))
+
         dispatch({ type: REGISTER })
       })
       .catch((err) => {
@@ -104,6 +116,7 @@ const AuthState = ({ children }) => {
 
   // Set User
   const setUser = async (user) => {
+    // setUserLoading()
     if (user) {
       const { email, displayName, uid } = user
       try {

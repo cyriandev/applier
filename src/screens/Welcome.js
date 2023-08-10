@@ -4,6 +4,8 @@ import {
   Button,
   TouchableHighlight,
   StyleSheet,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native'
 import React, { useContext } from 'react'
 import AuthContext from '../context/auth/authContext'
@@ -15,8 +17,8 @@ const Welcome = ({ navigation }) => {
     <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 30 }}>
       <HomeHeader title='Applier' navigation={navigation} />
 
-      <View style={{ padding: 20 }}>
-        <TouchableHighlight>
+      <View style={{ paddingHorizontal: 20 }}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Search')}>
           <View
             style={{
               backgroundColor: '#f1f1f1',
@@ -24,12 +26,14 @@ const Welcome = ({ navigation }) => {
               borderRadius: 5,
               // borderWidth: 1,
               // borderColor: '#bdbdbd',
+              justifyContent: 'center',
+              height: 45,
               elevation: 1,
             }}
           >
-            <Text>Search</Text>
+            <Text style={{ fontSize: 17, color: 'gray' }}>Search</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableWithoutFeedback>
       </View>
     </View>
   )

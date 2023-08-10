@@ -28,6 +28,7 @@ export default (state, action) => {
         ...state,
         user: action.payload,
         userLoading: false,
+        loading: false,
       }
 
     case AUTH_ERROR:
@@ -41,7 +42,7 @@ export default (state, action) => {
     case LOGIN:
       return {
         ...state,
-        loading: false,
+        // loading: false,
       }
     case LOGOUT:
       return {

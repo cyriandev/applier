@@ -1,0 +1,66 @@
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Linking,
+} from 'react-native'
+import React from 'react'
+
+const UniItem = ({ university }) => {
+  return (
+    <View style={{ flexDirection: 'row', marginTop: 20, paddingBottom: 10 }}>
+      <Image
+        source={{ uri: university.image }}
+        style={{ width: 80, height: 80, borderRadius: 5 }}
+      />
+      <View style={{ marginLeft: 10, flex: 1 }}>
+        <Text style={{ color: 'black', fontSize: 18 }}>{university.name}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ color: 'gray' }}>Opening date:</Text>
+          <Text style={{ color: '#036552', marginLeft: 10 }}>
+            {university.openingDate}
+          </Text>
+        </View>
+
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ color: 'gray' }}>Closing date:</Text>
+          <Text style={{ color: '#036552', marginLeft: 10 }}>
+            {university.closingDate}
+          </Text>
+        </View>
+
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ color: 'gray' }}>Application fee:</Text>
+          <Text style={{ color: '#036552', marginLeft: 10 }}>
+            {university.applicationFee
+              ? `R ${university.applicationFee}`
+              : 'Free'}
+          </Text>
+        </View>
+
+        <View style={{ marginTop: 10, flex: 1 }}>
+          <TouchableOpacity
+            onPress={() => Linking.openURL(university.onlineApplicationLink)}
+          >
+            <Text
+              style={{
+                backgroundColor: '#036552',
+                padding: 10,
+                color: 'white',
+                borderRadius: 5,
+              }}
+            >
+              Apply Online
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  )
+}
+
+export default UniItem
+
+const styles = StyleSheet.create({})

@@ -9,6 +9,8 @@ import { auth } from '../firebase/config'
 import Loading from './Loading'
 import Chat from '../screens/Chat'
 import ResetPassword from '../screens/auth/ResetPassword'
+import APSCalculator from '../screens/APSCalculator'
+import Search from '../screens/Search'
 
 const Stack = createNativeStackNavigator()
 
@@ -31,6 +33,8 @@ const MainNavigator = () => {
           <>
             <Stack.Screen name='Home' component={Home} />
             <Stack.Screen name='Chat' component={Chat} />
+            <Stack.Screen name='APS' component={APSCalculator} />
+            <Stack.Screen name='Search' component={Search} />
           </>
         ) : (
           <>

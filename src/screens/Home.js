@@ -23,7 +23,7 @@ const Home = () => {
       activeColor='black'
       barStyle={{
         backgroundColor: '#f1f1f1',
-        height: 70,
+        // height: 70,
       }}
       // labeled={user.role == 'admin' ? true : false}
       inactiveColor='#bdbdbd'
@@ -62,7 +62,7 @@ const Home = () => {
             name='UniApplications'
             component={UniApplications}
             options={{
-              tabBarLabel: 'Uni Application',
+              tabBarLabel: 'University Application',
               tabBarIcon: ({ color }) => (
                 <Ionicons name='school' color={color} size={25} />
               ),

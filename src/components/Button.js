@@ -9,7 +9,7 @@ import React from 'react'
 
 const Button = ({ text, onPress, loading }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} disabled={loading}>
       <View
         style={{
           backgroundColor: '#036552',

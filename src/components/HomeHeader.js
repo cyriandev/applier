@@ -1,15 +1,21 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import React, { useContext } from 'react'
 import { Ionicons } from '@expo/vector-icons'
+import logo from '../images/logo.png'
+import AuthContext from '../context/auth/authContext'
 
 const HomeHeader = ({ title, navigation }) => {
+  const { user } = useContext(AuthContext)
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 20, fontWeight: '700', color: 'black' }}>
-        {title}
-      </Text>
+      <Image
+        source={logo}
+        style={{ width: 50, height: 50, resizeMode: 'center' }}
+      />
 
-      <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Chat', { id: user.id })}
+      >
         <View style={{ padding: 5 }}>
           <Ionicons name='chatbubble' size={24} color='black' />
         </View>
