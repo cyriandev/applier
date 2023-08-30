@@ -52,7 +52,7 @@ const SelectInput = ({
         >
           <Picker
             selectedValue={selectedMark}
-            onValueChange={(itemValue, itemIndex) => setSelectedMark(itemValue)}
+            onValueChange={(itemValue) => setSelectedMark(itemValue)}
           >
             <Picker.Item style={{ color: '#bdbdbd' }} label='Mark' value='' />
             {marks.map(({ mark, points }, index) => (

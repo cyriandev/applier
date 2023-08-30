@@ -4,6 +4,7 @@ import {
   APPLIER_ERROR,
   GET_JOBS_LOADING,
   GET_JOBS,
+  APPLY,
 } from '../types'
 
 export default (state, action) => {
@@ -29,6 +30,11 @@ export default (state, action) => {
         ...state,
         jobs: action.payload,
         jobsLoading: false,
+      }
+    case APPLY:
+      return {
+        ...state,
+        universitiesLoading: false,
       }
 
     case APPLIER_ERROR:

@@ -11,6 +11,7 @@ import {
   AUTH_ERROR,
   LOGOUT,
   RESET_PASSWORD,
+  SET_PERSONAL_INFORMATION,
 } from '../types'
 import {
   createUserWithEmailAndPassword,
@@ -28,10 +29,12 @@ import {
   setDoc,
   where,
 } from 'firebase/firestore'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const AuthState = ({ children }) => {
   const initialState = {
     user: null,
+    personalInformation: null,
     isAuthenticated: false,
     loading: false,
     userLoading: false,
@@ -39,6 +42,7 @@ const AuthState = ({ children }) => {
   }
   const [state, dispatch] = useReducer(AuthReducer, initialState)
   const adminsCollection = collection(db, 'admins')
+  const personalInformationCollection = collection(db, 'personalInformation')
 
   // Register
   const register = async (user) => {
@@ -120,9 +124,13 @@ const AuthState = ({ children }) => {
     if (user) {
       const { email, displayName, uid } = user
       try {
+        // get admin
         const q = query(adminsCollection, where('email', '==', email))
         const res = await getDocs(q)
         const admin = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+
+        // Get user personal information
+        const personalInformation = await AsyncStorage.getItem('personalInfo')
 
         dispatch({
           type: SET_USER,
@@ -132,6 +140,14 @@ const AuthState = ({ children }) => {
             id: uid,
             role: admin.length ? 'admin' : 'user',
           },
+        })
+
+        dispatch({
+          type: SET_PERSONAL_INFORMATION,
+          payload:
+            personalInformation != null
+              ? JSON.parse(personalInformation)
+              : null,
         })
       } catch (error) {
         console.log(error)
@@ -186,6 +202,20 @@ const AuthState = ({ children }) => {
       console.log(err)
     }
   }
+
+  const storePersonalInfo = async (info, navigation) => {
+    setAuthLoading()
+    try {
+      const jsonValue = JSON.stringify(info)
+      await AsyncStorage.setItem('personalInfo', jsonValue)
+      dispatch({ type: SET_PERSONAL_INFORMATION, payload: info })
+      navigation.goBack()
+    } catch (e) {
+      dispatch({ type: AUTH_ERROR })
+      console.log(e)
+    }
+  }
+
   // Set Loading
   const setAuthLoading = () => dispatch({ type: AUTH_LOADING })
   const setUserLoading = () => dispatch({ type: USER_LOADING })
@@ -197,12 +227,14 @@ const AuthState = ({ children }) => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         userLoading: state.userLoading,
+        personalInformation: state.personalInformation,
         setUser,
         register,
         login,
         dispatch,
         logout,
         resetPassword,
+        storePersonalInfo,
       }}
     >
       {children}

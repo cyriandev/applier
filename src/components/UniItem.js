@@ -1,14 +1,11 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Linking,
-} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 
-const UniItem = ({ university }) => {
+const UniItem = ({ university, navigation, userID }) => {
+  const application = university?.applications?.some(
+    (application) => application.userId == userID
+  )
+
   return (
     <View style={{ flexDirection: 'row', marginTop: 20, paddingBottom: 10 }}>
       <Image
@@ -42,7 +39,7 @@ const UniItem = ({ university }) => {
 
         <View style={{ marginTop: 10, flex: 1 }}>
           <TouchableOpacity
-            onPress={() => Linking.openURL(university.onlineApplicationLink)}
+            onPress={() => navigation.navigate('Apply', university)}
           >
             <Text
               style={{
@@ -52,7 +49,7 @@ const UniItem = ({ university }) => {
                 borderRadius: 5,
               }}
             >
-              Apply Online
+              {application ? 'View Application' : 'Apply'}
             </Text>
           </TouchableOpacity>
         </View>
@@ -62,5 +59,3 @@ const UniItem = ({ university }) => {
 }
 
 export default UniItem
-
-const styles = StyleSheet.create({})

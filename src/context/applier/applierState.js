@@ -8,10 +8,21 @@ import {
   GET_UNIVERSITIES_LOADING,
   GET_JOBS,
   GET_JOBS_LOADING,
+  APPLY,
 } from '../types'
 
 import { db } from '../../firebase/config'
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import {
+  Timestamp,
+  arrayUnion,
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore'
+import axios from 'axios'
 
 const ApplierState = ({ children }) => {
   const initialState = {
@@ -44,15 +55,34 @@ const ApplierState = ({ children }) => {
 
   // Get Jobs
   const getJobs = async () => {
+    console.log('GER')
     setJobsLoading()
     try {
-      const q = query(jobsCollection)
-      const res = await getDocs(q)
-      const jobs = res.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }))
-      dispatch({ type: GET_JOBS, payload: jobs })
+      const res = await axios.get(
+        'https://api.adzuna.com/v1/api/jobs/za/search/1?app_id=8acd5000&app_key=6979e0afdbb257def6d2bd5222251bf2&results_per_page=20&what=IT&content-type=application/json'
+      )
+
+      dispatch({ type: GET_JOBS, payload: res.data.results })
+    } catch (error) {
+      dispatch({ type: APPLIER_ERROR })
+      console.log(error)
+    }
+  }
+  // Apply
+  const apply = async (id, user, qualification, navigation) => {
+    setGetUniversitiesLoading()
+    try {
+      await updateDoc(doc(db, 'universities', id), {
+        applications: arrayUnion({
+          userId: user.id,
+          qualification,
+          status: 'Pending',
+          date: Timestamp.now(),
+        }),
+      })
+
+      dispatch({ type: APPLY })
+      navigation.goBack()
     } catch (error) {
       dispatch({ type: APPLIER_ERROR })
       console.log(error)
@@ -73,6 +103,7 @@ const ApplierState = ({ children }) => {
         jobs: state.jobs,
         getUniversities,
         getJobs,
+        apply,
       }}
     >
       {children}

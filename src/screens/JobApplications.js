@@ -39,12 +39,14 @@ const JobApplications = () => {
           <FlatList
             data={jobs}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => Linking.openURL(item.link)}>
+              <TouchableOpacity
+                onPress={() => Linking.openURL(item.redirect_url)}
+              >
                 <View
                   style={{
                     backgroundColor: '#f1f1f1',
                     borderRadius: 5,
-                    marginTop: 10,
+                    marginVertical: 10,
                     padding: 10,
                   }}
                 >
@@ -60,7 +62,9 @@ const JobApplications = () => {
                     </Text>
                     <Ionicons name='open-outline' size={20} color='black' />
                   </View>
-                  <Text style={{ color: '#036552' }}>{item.company}</Text>
+                  <Text style={{ color: '#036552' }}>
+                    {item.company.display_name}
+                  </Text>
                   <Text
                     numberOfLines={4}
                     style={{ color: 'gray', marginTop: 10 }}

@@ -1,15 +1,42 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 import UniItem from '../components/UniItem'
 import ApplierContext from '../context/applier/applierContext'
 import Loading from '../components/Loading'
+import { Ionicons } from '@expo/vector-icons'
+import AuthContext from '../context/auth/authContext'
+import { collection, doc, onSnapshot, query } from 'firebase/firestore'
+import { db } from '../firebase/config'
 
 const UniApplications = ({ navigation }) => {
-  const { getUniversities, universitiesLoading, universities } =
-    useContext(ApplierContext)
+  // const { getUniversities, universitiesLoading, universities } =
+  //   useContext(ApplierContext)
+  const { user } = useContext(AuthContext)
+  const [universities, setUniversities] = useState([])
+  const [universitiesLoading, setUniversitiesLoading] = useState(false)
 
   useEffect(() => {
+    const getUniversities = () => {
+      setUniversitiesLoading(true)
+      const unsubscribe = onSnapshot(
+        query(collection(db, 'universities')),
+        (querySnapshot) => {
+          const universities = []
+          querySnapshot.forEach((doc) => {
+            universities.push({ id: doc.id, ...doc.data() })
+          })
+
+          // doc.exists() && setUniversities(doc.data())
+          setUniversities(universities)
+          setUniversitiesLoading(false)
+          // flatListRef.current.scrollToEnd({ animated: true })
+        }
+      )
+      return () => {
+        unsubscribe()
+      }
+    }
     getUniversities()
   }, [])
 
@@ -43,11 +70,17 @@ const UniApplications = ({ navigation }) => {
         ) : (
           <FlatList
             data={universities}
-            renderItem={({ item }) => <UniItem university={item} />}
+            renderItem={({ item }) => (
+              <UniItem
+                university={item}
+                navigation={navigation}
+                userID={user.id}
+              />
+            )}
             keyExtractor={(item, index) => index}
             showsVerticalScrollIndicator={false}
-            refreshing={universitiesLoading}
-            onRefresh={() => getUniversities()}
+            // refreshing={universitiesLoading}
+            // onRefresh={() => getUniversities()}
           />
         )}
       </View>

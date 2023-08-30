@@ -7,6 +7,7 @@ import {
   LOGIN,
   LOGOUT,
   RESET_PASSWORD,
+  SET_PERSONAL_INFORMATION,
 } from '../types'
 
 export default (state, action) => {
@@ -48,6 +49,12 @@ export default (state, action) => {
       return {
         ...state,
         user: null,
+        loading: false,
+      }
+    case SET_PERSONAL_INFORMATION:
+      return {
+        ...state,
+        personalInformation: action.payload,
         loading: false,
       }
     case RESET_PASSWORD:

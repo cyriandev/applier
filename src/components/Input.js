@@ -9,6 +9,7 @@ const Input = ({
   setValue,
   value,
   secureTextEntry,
+  keyboardType,
 }) => {
   return (
     <View style={styles.container}>
@@ -26,6 +27,7 @@ const Input = ({
           onChangeText={(text) => setValue(text)}
           value={value}
           secureTextEntry={secureTextEntry}
+          keyboardType={keyboardType}
         />
       </View>
     </View>

@@ -11,6 +11,8 @@ import Chat from '../screens/Chat'
 import ResetPassword from '../screens/auth/ResetPassword'
 import APSCalculator from '../screens/APSCalculator'
 import Search from '../screens/Search'
+import Apply from '../screens/Apply'
+import AddPersonalInfo from '../screens/AddPersonalInfo'
 
 const Stack = createNativeStackNavigator()
 
@@ -22,6 +24,8 @@ const MainNavigator = () => {
   }, [])
 
   if (userLoading) return <Loading />
+  // if (!personalInformation) return <AddPersonalInfo />
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -35,6 +39,8 @@ const MainNavigator = () => {
             <Stack.Screen name='Chat' component={Chat} />
             <Stack.Screen name='APS' component={APSCalculator} />
             <Stack.Screen name='Search' component={Search} />
+            <Stack.Screen name='Apply' component={Apply} />
+            <Stack.Screen name='AddPersonalInfo' component={AddPersonalInfo} />
           </>
         ) : (
           <>
