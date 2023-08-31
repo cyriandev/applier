@@ -82,7 +82,7 @@ const ApplierState = ({ children }) => {
       })
 
       dispatch({ type: APPLY })
-      navigation.goBack()
+      navigation.navigate('Home')
     } catch (error) {
       dispatch({ type: APPLIER_ERROR })
       console.log(error)

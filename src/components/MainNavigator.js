@@ -13,6 +13,7 @@ import APSCalculator from '../screens/APSCalculator'
 import Search from '../screens/Search'
 import Apply from '../screens/Apply'
 import AddPersonalInfo from '../screens/AddPersonalInfo'
+import Pay from '../screens/Pay'
 
 const Stack = createNativeStackNavigator()
 
@@ -41,6 +42,7 @@ const MainNavigator = () => {
             <Stack.Screen name='Search' component={Search} />
             <Stack.Screen name='Apply' component={Apply} />
             <Stack.Screen name='AddPersonalInfo' component={AddPersonalInfo} />
+            <Stack.Screen name='Pay' component={Pay} />
           </>
         ) : (
           <>

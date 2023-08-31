@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Linking,
 } from 'react-native'
 import React, { useState } from 'react'
 import { Feather, Ionicons } from '@expo/vector-icons'

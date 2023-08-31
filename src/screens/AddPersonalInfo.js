@@ -9,6 +9,20 @@ import React, { useContext, useState } from 'react'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import AuthContext from '../context/auth/authContext'
+import { Picker } from '@react-native-picker/picker'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+
+const schoolSubjects = [
+  'Accounting',
+  'Agricultural Science',
+  'Geography',
+  'Life Sciences',
+  'Physical sciences',
+  'History',
+  'Home Language',
+  'First Additional Language',
+  'Second Additional Language',
+]
 
 const AddPersonalInfo = ({ navigation }) => {
   const { storePersonalInfo, personalInformation, loading } =
@@ -132,18 +146,69 @@ const AddPersonalInfo = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           ))}
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <View style={{ flex: 1 }}>
-              <Input
+              {/* <Input
                 label='Subject'
                 placeholder='Enter Subject'
                 icon='book'
                 setValue={setSubject}
                 value={subject}
-              />
-              <Text style={{ color: 'gray', fontSize: 12 }}>
-                Don't include life orientation
+              /> */}
+              <Text
+                style={{
+                  marginBottom: 10,
+                  fontSize: 15,
+                  color: 'black',
+                  fontWeight: '500',
+                }}
+              >
+                Subject
               </Text>
+              <View
+                style={{
+                  height: 50,
+                  backgroundColor: 'white',
+                  borderRadius: 5,
+                  borderWidth: 1,
+                  borderColor: '#E3E6E6',
+                  overflow: 'hidden',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}
+              >
+                <MaterialCommunityIcons
+                  name='book'
+                  size={20}
+                  color='black'
+                  style={{ paddingHorizontal: 10 }}
+                />
+                <Picker
+                  selectedValue={subject}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setSubject(itemValue)
+                  }
+                  style={{
+                    // backgroundColor: 'red',
+                    height: 50,
+                    borderRadius: 5,
+                    flex: 1,
+                    backgroundColor: 'white',
+                  }}
+                >
+                  <Picker.Item
+                    style={{ color: '#bdbdbd' }}
+                    label={`Select subject`}
+                    value=''
+                  />
+                  {schoolSubjects.map((subject, index) => (
+                    <Picker.Item key={index} label={subject} value={subject} />
+                  ))}
+                </Picker>
+              </View>
+              {/* <Text style={{ color: 'gray', fontSize: 12 }}>
+                Don't include life orientation
+              </Text> */}
             </View>
             <View style={{ flex: 0.5, marginLeft: 5 }}>
               <Input

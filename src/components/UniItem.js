@@ -31,9 +31,9 @@ const UniItem = ({ university, navigation, userID }) => {
         <View style={{ flexDirection: 'row' }}>
           <Text style={{ color: 'gray' }}>Application fee:</Text>
           <Text style={{ color: '#036552', marginLeft: 10 }}>
-            {university.applicationFee
-              ? `R ${university.applicationFee}`
-              : 'Free'}
+            {university.applicationFee == 0
+              ? 'Free'
+              : `R ${university.applicationFee}`}
           </Text>
         </View>
 

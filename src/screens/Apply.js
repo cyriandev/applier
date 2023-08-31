@@ -33,6 +33,16 @@ const Apply = ({ navigation, route }) => {
     apply(id, user, selectedQualification, navigation)
   }
 
+  const handlePay = () => {
+    navigation.navigate('Pay', {
+      id,
+      user,
+      selectedQualification,
+      applicationFee,
+      personalInformation,
+    })
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 30 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -149,7 +159,7 @@ const Apply = ({ navigation, route }) => {
               >
                 <Text style={{ color: 'gray' }}>Application fee</Text>
                 <Text style={{ color: '#036552', marginLeft: 10 }}>
-                  {applicationFee ? `R ${applicationFee}` : 'Free'}
+                  {applicationFee == 0 ? 'Free' : `R ${applicationFee}`}
                 </Text>
               </View>
             </View>
@@ -295,11 +305,19 @@ const Apply = ({ navigation, route }) => {
       selectedQualification !== '' &&
       selectedQualification.aps < aps ? (
         <View style={{ padding: 20 }}>
-          <Button
-            text='Apply'
-            onPress={handleApply}
-            loading={universitiesLoading}
-          />
+          {applicationFee == 0 ? (
+            <Button
+              text='Apply'
+              onPress={handleApply}
+              loading={universitiesLoading}
+            />
+          ) : (
+            <Button
+              text={`Pay R ${applicationFee}`}
+              onPress={handlePay}
+              loading={universitiesLoading}
+            />
+          )}
         </View>
       ) : null}
     </View>
