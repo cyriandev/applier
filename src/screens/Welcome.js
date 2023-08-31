@@ -1,16 +1,15 @@
 import {
   View,
   Text,
-  Button,
-  TouchableHighlight,
   StyleSheet,
-  TouchableOpacity,
   TouchableWithoutFeedback,
+  Image,
+  Dimensions,
 } from 'react-native'
-import React, { useContext } from 'react'
-import AuthContext from '../context/auth/authContext'
+import React from 'react'
 import HomeHeader from '../components/HomeHeader'
-import Input from '../components/Input'
+import bg from '../images/bg.jpg'
+const { width } = Dimensions.get('window')
 
 const Welcome = ({ navigation }) => {
   return (
@@ -24,8 +23,6 @@ const Welcome = ({ navigation }) => {
               backgroundColor: '#f1f1f1',
               padding: 10,
               borderRadius: 5,
-              // borderWidth: 1,
-              // borderColor: '#bdbdbd',
               justifyContent: 'center',
               height: 45,
               elevation: 1,
@@ -34,6 +31,17 @@ const Welcome = ({ navigation }) => {
             <Text style={{ fontSize: 17, color: 'gray' }}>Search</Text>
           </View>
         </TouchableWithoutFeedback>
+      </View>
+
+      <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+        <Image
+          source={bg}
+          style={{
+            width: width - 20,
+            height: width - 20,
+            resizeMode: 'center',
+          }}
+        />
       </View>
     </View>
   )
