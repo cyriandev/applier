@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 
 const UniItem = ({ university, navigation, userID }) => {

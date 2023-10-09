@@ -3,11 +3,13 @@ import ApplierContext from './applierContext'
 import ApplierReducer from './applierReducer'
 
 import {
-  GET_UNIVERSITIES,
-  APPLIER_ERROR,
   GET_UNIVERSITIES_LOADING,
-  GET_JOBS,
+  GET_NOTICES_LOADING,
+  GET_UNIVERSITIES,
   GET_JOBS_LOADING,
+  APPLIER_ERROR,
+  GET_NOTICES,
+  GET_JOBS,
   APPLY,
 } from '../types'
 
@@ -20,7 +22,6 @@ import {
   getDocs,
   query,
   updateDoc,
-  where,
 } from 'firebase/firestore'
 import axios from 'axios'
 
@@ -28,13 +29,15 @@ const ApplierState = ({ children }) => {
   const initialState = {
     jobs: [],
     universities: [],
+    notices: [],
     universitiesLoading: false,
     jobsLoading: false,
     errors: null,
+    noticesLoading: false,
   }
   const [state, dispatch] = useReducer(ApplierReducer, initialState)
   const universitiesCollection = collection(db, 'universities')
-  const jobsCollection = collection(db, 'Jobs')
+  const noticesCollection = collection(db, 'notices')
 
   // Get Universities
   const getUniversities = async () => {
@@ -47,6 +50,23 @@ const ApplierState = ({ children }) => {
         id: doc.id,
       }))
       dispatch({ type: GET_UNIVERSITIES, payload: universities })
+    } catch (error) {
+      dispatch({ type: APPLIER_ERROR })
+      console.log(error)
+    }
+  }
+
+  // Get Notices
+  const getNotices = async () => {
+    setNoticesLoading()
+    try {
+      const q = query(noticesCollection)
+      const res = await getDocs(q)
+      const notices = res.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+      dispatch({ type: GET_NOTICES, payload: notices })
     } catch (error) {
       dispatch({ type: APPLIER_ERROR })
       console.log(error)
@@ -93,15 +113,19 @@ const ApplierState = ({ children }) => {
   const setGetUniversitiesLoading = () =>
     dispatch({ type: GET_UNIVERSITIES_LOADING })
   const setJobsLoading = () => dispatch({ type: GET_JOBS_LOADING })
+  const setNoticesLoading = () => dispatch({ type: GET_NOTICES_LOADING })
 
   return (
     <ApplierContext.Provider
       value={{
         universitiesLoading: state.universitiesLoading,
+        noticesLoading: state.noticesLoading,
         universities: state.universities,
         jobsLoading: state.jobsLoading,
+        notices: state.notices,
         jobs: state.jobs,
         getUniversities,
+        getNotices,
         getJobs,
         apply,
       }}

@@ -5,6 +5,8 @@ import {
   GET_JOBS_LOADING,
   GET_JOBS,
   APPLY,
+  GET_NOTICES,
+  GET_NOTICES_LOADING,
 } from '../types'
 
 export default (state, action) => {
@@ -19,11 +21,22 @@ export default (state, action) => {
         ...state,
         jobsLoading: true,
       }
+    case GET_NOTICES_LOADING:
+      return {
+        ...state,
+        noticesLoading: true,
+      }
     case GET_UNIVERSITIES:
       return {
         ...state,
         universities: action.payload,
         universitiesLoading: false,
+      }
+    case GET_NOTICES:
+      return {
+        ...state,
+        notices: action.payload,
+        noticesLoading: false,
       }
     case GET_JOBS:
       return {
@@ -42,6 +55,7 @@ export default (state, action) => {
         ...state,
         universitiesLoading: false,
         jobsLoading: false,
+        noticesLoading: false,
       }
     default:
       return state
