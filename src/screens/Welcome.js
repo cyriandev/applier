@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   FlatList,
+  TouchableOpacity,
 } from 'react-native'
 import React, { useContext, useEffect } from 'react'
 import HomeHeader from '../components/HomeHeader'
@@ -42,17 +43,6 @@ const Welcome = ({ navigation }) => {
           </View>
         </TouchableWithoutFeedback>
       </View>
-
-      {/* <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-        <Image
-          source={bg}
-          style={{
-            width: width - 20,
-            height: width - 20,
-            resizeMode: 'center',
-          }}
-        />
-      </View> */}
       <View style={{ flex: 1, padding: 20 }}>
         <Text style={{ color: 'black', fontSize: 20, fontWeight: '600' }}>
           Notice Board

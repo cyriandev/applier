@@ -75,7 +75,6 @@ const ApplierState = ({ children }) => {
 
   // Get Jobs
   const getJobs = async () => {
-    console.log('GER')
     setJobsLoading()
     try {
       const res = await axios.get(
@@ -108,6 +107,99 @@ const ApplierState = ({ children }) => {
       console.log(error)
     }
   }
+
+  // Apply
+  // const updateUni = async () => {
+  //   try {
+  //     await updateDoc(doc(db, 'universities', 'ux0YYyQApaSIs4CVsXMl'), {
+  //       qualifications: arrayUnion(
+  //         { name: 'Nursing', aps: 25, duration: 3 },
+  //         { name: 'Human Nutrition', aps: 20, duration: 3 },
+  //         { name: 'Health Promotion Unit', aps: 25, duration: 2 },
+  //         { name: 'Optometry', aps: 20, duration: 3 },
+  //         { name: 'Pharmacy', aps: 25, duration: 2 },
+  //         {
+  //           name: 'Medical Sciences',
+  //           aps: 35,
+  //           duration: 7,
+  //         },
+  //         { name: 'Faculty of Humanities', aps: 25, duration: 3 },
+  //         {
+  //           name: 'Advanced Certificate in Education – Mathematics (ACEM)',
+  //           aps: 20,
+  //           duration: 1,
+  //         },
+  //         {
+  //           name: 'Advanced Certificate in Education – Science (ACES)',
+  //           aps: 25,
+  //           duration: 3,
+  //         },
+  //         {
+  //           name: 'Advanced Certificate in Education – Grade R (ACEGR)',
+  //           aps: 20,
+  //           duration: 2,
+  //         },
+  //         {
+  //           name: 'Advanced Certificate in Education – Learners with Barriers to Learning and Education – Remedial Education (ACERE)',
+  //           aps: 25,
+  //           duration: 3,
+  //         },
+  //         {
+  //           name: 'Advanced Certificate in Adult Basic Education and Training (ACEABE)',
+  //           aps: 25,
+  //           duration: 3,
+  //         },
+  //         {
+  //           name: 'Advanced Certificate in Education – Life Orientation (ACELO)',
+  //           aps: 25,
+  //           duration: 3,
+  //         },
+  //         {
+  //           name: 'Advanced Certificate in Education – Integrating Values and Human Rights in Education (ACEHRE)',
+  //           aps: 25,
+  //           duration: 3,
+  //         },
+  //         {
+  //           name: 'Post Graduate Certificate In Education (PGCE)',
+  //           aps: 25,
+  //           duration: 3,
+  //         },
+  //         {
+  //           name: 'Bachelor of Education Senior Phase and FET (BEDSPF)',
+  //           aps: 25,
+  //           duration: 3,
+  //         },
+  //         { name: 'Computer Science', aps: 25, duration: 3 },
+  //         { name: 'Mathematics and Applied Mathematics', aps: 25, duration: 3 },
+  //         { name: 'Statistics and Operations Research', aps: 25, duration: 3 },
+  //         {
+  //           name: 'Agricultural Economics and Animal Production',
+  //           aps: 25,
+  //           duration: 3,
+  //         },
+  //         { name: 'Geography and Environmental studies', aps: 25, duration: 3 },
+  //         {
+  //           name: 'Plant Production,Soil Science and Remote Sensing',
+  //           aps: 25,
+  //           duration: 3,
+  //         },
+  //         { name: 'Water and Sanitation', aps: 25, duration: 3 },
+  //         { name: 'Accounting and Auditing', aps: 25, duration: 3 },
+  //         { name: 'Business Management', aps: 25, duration: 3 },
+  //         { name: 'Economics', aps: 25, duration: 3 },
+  //         { name: 'Development Studies', aps: 25, duration: 3 },
+  //         { name: 'Human Resource Management', aps: 25, duration: 3 },
+  //         { name: 'Public Administration', aps: 25, duration: 3 },
+  //         { name: 'Transport Management', aps: 25, duration: 3 },
+  //         { name: 'Bachelor Of Law', aps: 25, duration: 3 }
+  //       ),
+  //     })
+
+  //     console.log('done')
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   // Set Loading
   const setGetUniversitiesLoading = () =>

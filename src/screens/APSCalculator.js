@@ -24,6 +24,30 @@ const schoolSubjects = [
   'Life Orientation',
   'Physical sciences',
   'History',
+  'Business Studies ',
+  'Consumer Studies ',
+  'Dramatic Arts',
+  'Information Technology ',
+  'Music',
+  'Physical Sciences ',
+  'Religion Studies',
+  'Visual Arts',
+  'Economics',
+  'Engineering graphics and design ',
+]
+
+const languageSubjects = [
+  'Sesotho',
+  'Setswana',
+  'Siswati',
+  'Tshivenda',
+  'Xitsonga',
+  'Afrikaans',
+  'English',
+  'IsiNdebele',
+  'IsiXhosa',
+  'IsiZulu',
+  'Sepedi',
 ]
 
 const APSCalculator = ({ navigation }) => {
@@ -101,11 +125,7 @@ const APSCalculator = ({ navigation }) => {
         <View>
           <SelectInput
             title='Language 1'
-            subjects={[
-              'Home Language',
-              'First Additional Language',
-              'Second Additional Language',
-            ]}
+            subjects={languageSubjects}
             marks={apsMarks}
             setSelectedSubject={setLanguage1}
             setSelectedMark={setLanguage1Mark}
@@ -115,11 +135,7 @@ const APSCalculator = ({ navigation }) => {
 
           <SelectInput
             title='Language 2'
-            subjects={[
-              'Home Language',
-              'First Additional Language',
-              'Second Additional Language',
-            ]}
+            subjects={languageSubjects}
             marks={apsMarks}
             setSelectedSubject={setLanguage2}
             setSelectedMark={setLanguage2Mark}
